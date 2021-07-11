@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block th:include="../fragments/header.html :: headerfiles">
+        </th:block>
+</head>
+<body>
+ 
+<div th:insert="../fragments/header.html :: header"></div>
+<div>
+<a th:href="@{/comments/create}"><button>Write new</button></a>
+	<table style="width: 800px;" id="table">
+	<h1 style="margin-top: 30px;">Person`s comments</h1>
+	<tbody>
+		<tr><th>No</th><th>title</th><th>body</th><th>author</th><th>date</th></tr>
+		 
+		<tr th:each="comment, state : ${comments}">
+		 	<td id="number"></td>
+			<td th:text="${comment.getTitle()}"></td>
+			<td th:text="${comment.getText().length() > 20} ? ${comment.getText().substring(0,20)} + '...' : ${comment.getText()}"></td>
+			<td th:text="${comment.getAuth()}"></td>
+			<td th:text="${comment.getDate()}"></td>
+			<td><a th:href="@{/comments/{id}(id=${comment.getId()})}"><button>Read</button></a></td>
+		 
+		</tr>
+	</tbody>
+	</table>
+	<div style="display: inline-block">
+	 
+		<ul>
+			<a th:href="${id > 1}? @{/comments/page/{id}(id=${minus})} : @{/comments/page/1}">Previous</a>
+				<th:block  th:each="page : ${pages}">
+		            <a th:href="@{/comments/page/{id}(id=${page})}" th:utext="${page}"></a>
+		          </th:block>
+	          <a th:if="${id < pages.size()}" th:href="@{/comments/page/{id}(id=${plus})}">Next</a>
+	          <a th:unless="${id < pages.size()}" th:href="@{/comments/page/{id}(id=${id})}">Final</a>
+		</ul>
+		 <input style="display: none;" id="page" type="number"  name="page" th:value="${id}"/>
+		</div>
+	</div>
+<script>
+	 
+		window.onload = function(n, d, table, totalRows){
+		n = document.querySelector('#page').value;
+		n = (n*5-5)+1;		 
+		table = document.getElementById("table"); 
+		totalRows = document.getElementById("table").rows.length;
+		d = 1;
+		for(let i =n; i<n+5; i++,d++){
+			table.rows[d].cells[0].innerText = i;
+		}
+	}
+
+</script>
+</body>
+</html>

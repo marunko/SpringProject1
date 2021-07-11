@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block th:include="../fragments/header.html :: headerfiles">
+        </th:block>
+</head>
+<body>
+<div th:insert="../fragments/header.html :: header"></div>
+<div >
+	<div><h1 th:text="${comment.getTitle()}"></h1></div>	 
+	<div><p th:text="${comment.getText()}"></p></div> 
+	<div><p th:text="'Writen at: ' + ${comment.getDate()}"></p></div>
+	<form th:method="delete" th:action="@{/comments/{id}/delete(id=${comment.getId()})}">
+		<input type="submit" value="Delete"/> 
+	</form>
+</div>
+</body>
+</html>

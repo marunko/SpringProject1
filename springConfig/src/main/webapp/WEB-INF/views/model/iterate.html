@@ -1,0 +1,19 @@
+<!DOCTYPE xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>th:each</h1>
+ <table> 
+		<tr th:each="person, state : ${keynames}"
+               class="row" >
+          <td th:utext="${state.count}">No</td>
+          <td th:utext="${person.name}">Full Name</td>
+          <td th:utext="${person.age}">Email</td> 
+          </table> 
+<p>sad</p>
+
+</body>
+</html>

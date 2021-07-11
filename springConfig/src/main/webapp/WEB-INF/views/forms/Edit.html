@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block th:include="../fragments/header.html :: headerfiles">
+        </th:block>
+<style type="text/css">
+	.errors{
+		color: red;
+	}
+</style>
+</head>
+<body>
+<div th:insert="../fragments/header.html :: header"></div>
+	<form th:method="PATCH" th:action="@{/people/{id}(id=${person.get_id()})}" th:object="${person}">
+    
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <div class="errors" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+    <br/>
+    <lable for="age">Age</lable>
+	<input type="number" th:field="*{age}" id="age" min="0" max="100"/>
+	<div class="errors" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+	<br/>
+    <input type="submit" value="Add_person"/>
+</form>
+</body>
+</html>

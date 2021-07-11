@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+<a th:href="@{comments/create}"><button>Write new</button></a>
+	<table style="width: 800px;">
+	<h1>Person`s comments</h1>
+	<tbody>
+		<tr><th>title</th><th>body</th><th>author</th><th>date</th></tr>
+		<tr th:each="comment, count : ${comments}">
+		 	<td th:text="${count.count}"></td>
+			<td th:text="${comment.getTitle()}"></td>
+			 
+			<td th:text="${comment.getText().length() > 20} ? ${comment.getText().substring(0,20)} + '...' : ${comment.getText()}"></td>
+			<td th:text="${comment.getAuth()}"></td>
+			<td th:text="${comment.getDate()}"></td>
+			<td><a th:href="@{/comments/{id}(id=${comment.getId()})}"><button>Read</button></a></td>
+		 
+		</tr>
+	</tbody>
+</table>
+ 
+</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Text</title>
+<th:block th:include="../fragments/header.html :: headerfiles">
+        </th:block>
+</head>
+<body>
+<div th:insert="../fragments/header.html :: header"></div>
+<p th:text="${helloMessage}"/>
+<a th:href="@{/people/create}">CREATE NEW USER</a>
+<div th:each="person : ${people}">
+	<a th:href="@{/people/{id}(id=${person.get_id()})}" >
+	<h1 th:text="${person.name}"> </h1>
+	<h1 th:text="${person.age}"></h1>
+	</a>
+	<div> <a th:href="@{/people/{id}/edit(id=${person.get_id()})}"><button>EDIT |</button> </a>
+	<form th:method="delete" th:action="@{/people/{id}/delete(id=${person.get_id()})}">
+		<input type="submit" value="Delete"/> 
+	</form>
+	
+	
+	</div>
+
+</div>
+
+</body>
+</html>

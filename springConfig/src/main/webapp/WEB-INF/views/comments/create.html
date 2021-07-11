@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block th:include="../fragments/header.html :: headerfiles">
+        </th:block>
+</head>
+<body>
+<div th:insert="../fragments/header.html :: header"></div>
+<div class="inputsDiv"> 
+	<form th:method="POST" th:action="@{/comments/create}" th:object="${comments}">
+	    <label for="title">Title: </label>
+	    <br/>
+	    <input type="text" th:field="*{title}" id="title"/>
+	    
+	    <br/>
+	    <lable for="text">Comment:</lable>
+		 <br/>
+		<textarea rows="12" cols="50" th:field="*{text}" name="text"/>
+		
+		<br/>
+	
+		<select th:field="*{person_id}">
+		 
+	    <option th:each="person : ${person}"
+	        th:value="${person.get_id()}"
+	        th:text="${person.getName()}"
+	         >
+	            Choose...
+	    </option>
+		</select>
+		
+		
+	    <input type="submit" value="Send Comment"/>
+	</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<th:block th:include="../fragments/header.html :: headerfiles">
+        </th:block>
+<style type="text/css">
+	td{
+		text-align: center;
+		border: 1px double black; 
+	}
+	th{
+		border: 1px double black;
+	}
+
+</style>
+</head>
+<body>
+<div> 
+<div th:insert="../fragments/header.html :: header"></div>
+	<div> 
+		<h1 th:text="${id.name} + ' ' +${id.age}"> </h1>
+		 
+	</div>
+<a th:href="@{/people/{id}/edit(id=${id.get_id()})}">Edit</a>
+</div>
+
+<table style="width: 600px;">
+	<h1>Person`s comments</h1>
+	<tbody>
+		<tr><th>title</th><th>body</th><th>author</th><th>date</th></tr>
+		<tr th:each="comment : ${comments}">
+		 
+			<td th:text="${comment.getTitle()}"></td>
+			 
+			<td th:text="${comment.getText()}"></td>
+			<td th:text="${comment.getAuth()}"></td>
+			<td th:text="${comment.getDate()}"></td>
+			<td><a th:href="@{/comments/{id}(id=${comment.getId()})}"><button>Read</button></a></td>
+		 
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>
